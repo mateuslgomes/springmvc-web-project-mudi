@@ -1,10 +1,17 @@
 package br.com.alura.mvc.mudi.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "pedidos")
 public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
     private String nomeProduto;
     private BigDecimal valorNegociado;
     private LocalDate dataEntrega;
@@ -34,6 +41,10 @@ public class Pedido {
 
     public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getUrlProduto() {
