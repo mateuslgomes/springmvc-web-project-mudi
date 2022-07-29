@@ -23,7 +23,7 @@
                 <a class="nav-item nav-link" href="">Aprovado</a>
                 <a class="nav-item nav-link" href="">Entregue</a>
             </div>
-            <a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+            <a href="pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
         </nav>
     
         <div class="card" th:each="pedido : ${pedidos}">
@@ -33,7 +33,7 @@
                     <div class="col-12 col-sm-8 mb-3">
                         <div class="row ">
                             <div class="col-md-5">Valor: <span th:text="${pedido.valorNegociado}">200,99</span></div>
-                            <div class="col-md-6">Data da entrega: <span th:text="${pedido.dataDaEntrega}">10/02/2020</span></div>
+                            <div class="col-md-6">Data da entrega: <span th:text="${pedido.dataEntrega}">10/02/2025</span></div>
                         </div>
                         
                         <div>Produto</div> 
