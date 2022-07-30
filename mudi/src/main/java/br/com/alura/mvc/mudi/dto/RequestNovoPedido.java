@@ -1,8 +1,11 @@
 package br.com.alura.mvc.mudi.dto;
 
 import br.com.alura.mvc.mudi.model.Pedido;
+import br.com.alura.mvc.mudi.model.StatusPedido;
 
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class RequestNovoPedido {
     @NotBlank
@@ -51,6 +54,9 @@ public class RequestNovoPedido {
         pedido.setUrlImagem(this.urlImagem);
         pedido.setUrlProduto(this.urlProduto);
         pedido.setDescricao(this.descricao);
+        pedido.setValorNegociado(new BigDecimal(123.3));
+        pedido.setDataEntrega(LocalDate.now());
+        pedido.setStatus(StatusPedido.APROVADO);
         return pedido;
     }
 }
