@@ -27,7 +27,7 @@ public class PedidoController {
     @PostMapping("novo")
     public String novo(@Valid RequestNovoPedido request, BindingResult result) {
         if (result.hasErrors()) {
-            return "pedido/formulario";
+            return "/pedido/formulario";
         }
         Pedido pedido = request.toPedido();
         pedidoRepository.save(pedido);
