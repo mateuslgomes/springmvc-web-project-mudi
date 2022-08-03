@@ -29,7 +29,8 @@ public class SecurityConfiguration {
                         .loginPage("/login")
                         .defaultSuccessUrl("/home", true)
                         .permitAll()
-                ).logout(logout -> logout.logoutUrl("/logout"));
+                ).logout(logout -> logout.logoutUrl("/logout"))
+                .csrf().disable();
         return http.build();
     }
 
@@ -38,8 +39,8 @@ public class SecurityConfiguration {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         UserDetails user = builder()
-                .username("root")
-                .password(encoder.encode("root"))
+                .username("toraa")
+                .password(encoder.encode("toraa"))
                 .roles("ADM")
                 .build();
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
