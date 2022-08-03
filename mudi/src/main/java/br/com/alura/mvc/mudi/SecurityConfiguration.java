@@ -38,8 +38,8 @@ public class SecurityConfiguration {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         UserDetails user = builder()
-                .username("teste8")
-                .password(encoder.encode("teste8"))
+                .username("root")
+                .password(encoder.encode("root"))
                 .roles("ADM")
                 .build();
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
@@ -51,5 +51,5 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
 }
