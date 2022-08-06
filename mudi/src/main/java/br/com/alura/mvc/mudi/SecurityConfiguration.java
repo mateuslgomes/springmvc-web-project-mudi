@@ -23,13 +23,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().authenticated()
+                        .antMatchers("/home/**").permitAll()
+                        .anyRequest().authenticated().and()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/usuario/pedido", true)
                         .permitAll()
-                ).logout(logout -> logout.logoutUrl("/logout"))
+                ).logout(logout -> {
+                    logout.logoutUrl("/logout").logoutSuccessUrl("/home");
+                })
                 .csrf().disable();
         return http.build();
     }
@@ -39,8 +42,8 @@ public class SecurityConfiguration {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         UserDetails user = builder()
-                .username("torsaaaa")
-                .password(encoder.encode("torassaa"))
+                .username("user56")
+                    .password(encoder.encode("senha"))
                 .roles("ADM")
                 .build();
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);

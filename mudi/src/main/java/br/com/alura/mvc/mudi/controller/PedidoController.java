@@ -20,27 +20,28 @@ import javax.validation.Valid;
 public class PedidoController {
 
     @Autowired
-    PedidoRepository pedidoRepository;
+    private PedidoRepository pedidoRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("formulario")
-    public String formulario(RequestNovoPedido request) {
+    public String formulario(RequestNovoPedido requisicao) {
         return "pedido/formulario";
     }
 
     @PostMapping("novo")
-    public String novo(@Valid RequestNovoPedido request, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/pedido/formulario";
+    public String novo(@Valid RequestNovoPedido requisicao, BindingResult result) {
+        if(result.hasErrors()) {
+            return "pedido/formulario";
         }
+
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByUsername(username);
-        Pedido pedido = request.toPedido();
-        pedido.setUser(user);
+
+        User usuario = userRepository.findByUsername(username);
+        Pedido pedido = requisicao.toPedido();
+        pedido.setUser(usuario);
         pedidoRepository.save(pedido);
         return "redirect:/home";
     }
-
 }

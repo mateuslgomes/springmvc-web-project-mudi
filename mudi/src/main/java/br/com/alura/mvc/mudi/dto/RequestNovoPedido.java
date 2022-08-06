@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class RequestNovoPedido {
+
     @NotBlank
     private String nomeProduto;
     @NotBlank
@@ -15,6 +16,7 @@ public class RequestNovoPedido {
     @NotBlank
     private String urlImagem;
     private String descricao;
+
 
     public String getNomeProduto() {
         return nomeProduto;
@@ -56,7 +58,9 @@ public class RequestNovoPedido {
         pedido.setDescricao(this.descricao);
         pedido.setValorNegociado(new BigDecimal(123.3));
         pedido.setDataEntrega(LocalDate.now());
-        pedido.setStatus(StatusPedido.APROVADO);
+        pedido.setStatus(StatusPedido.ENTREGUE);
         return pedido;
     }
+
+
 }

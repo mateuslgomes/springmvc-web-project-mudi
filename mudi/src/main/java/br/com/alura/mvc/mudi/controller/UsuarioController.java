@@ -16,21 +16,21 @@ import java.util.List;
 
 @Controller
 @RequestMapping("usuario")
-public class UsuarioController  {
+public class UsuarioController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
 
     @GetMapping("pedido")
     public String home(Model model, Principal principal) {
-        List<Pedido> pedidos = pedidoRepository.findByUser(principal.getName());
+        List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
         model.addAttribute("pedidos", pedidos);
         return "usuario/home";
     }
 
     @GetMapping("pedido/{status}")
     public String porStatus(@PathVariable("status") String status, Model model, Principal principal) {
-        List<Pedido> pedidos = pedidoRepository.findByStatusUsers(StatusPedido.valueOf(status.toUpperCase()), principal.getName());
+        List<Pedido> pedidos = pedidoRepository.findByStatusEUsuario(StatusPedido.valueOf(status.toUpperCase()), principal.getName());
         model.addAttribute("pedidos", pedidos);
         model.addAttribute("status", status);
         return "usuario/home";
@@ -40,8 +40,4 @@ public class UsuarioController  {
     public String onError() {
         return "redirect:/usuario/home";
     }
-
 }
-
-
-
